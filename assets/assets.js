@@ -93,13 +93,15 @@ export const workData = [
         bgImage: '/work-1.png',
     },
     {
-        title: 'Geo based app',
-        description: 'web App',
+        title: 'YouTube Clone App',
+        description: ' Youtube Application',
+        link: 'https://movie-tube-clone.netlify.app/',
         bgImage: '/work-2.png',
     },
     {
-        title: 'Photography site',
-        description: 'Web Design',
+        title: 'Pokemon App',
+        description: 'Simple Pokemon App',
+        link:'https://github.com/Jeet6421/pokemon-app',
         bgImage: '/work-3.png',
     },
     {
