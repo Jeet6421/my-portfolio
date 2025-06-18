@@ -1,6 +1,7 @@
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 import React, { useState } from "react";
+
 import { motion } from "motion/react";
 const Contact = () => {
   const [result, setResult] = useState("");
@@ -10,10 +11,13 @@ const Contact = () => {
     setResult("Sending....");
     const formData = new FormData(event.target);
 
-    formData.append("access_key", "dd227874-145b-4c4d-bf66-58286cb5d096");
+    formData.append("access_key",process.env.ACCESS_KEY);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
+       headers: {
+    "Content-Type": "application/json"
+  },
       body: formData,
     });
 
