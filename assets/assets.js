@@ -95,7 +95,7 @@ export const workData = [
     {
         title: 'YouTube Clone App',
         description: ' Youtube Application',
-        link: 'https://movie-tube-clone.netlify.app/',
+        link: 'https://movieclone1.netlify.app/',
         bgImage: '/work-2.png',
     },
     {
