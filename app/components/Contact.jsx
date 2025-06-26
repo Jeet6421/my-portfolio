@@ -15,9 +15,6 @@ const Contact = () => {
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-       headers: {
-    "Content-Type": "application/json"
-  },
       body: formData,
     });
 
