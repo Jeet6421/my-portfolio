@@ -1,33 +1,38 @@
+"use client";
+
 import { assets } from "@/assets/assets";
 import Image from "next/image";
 import React, { useState } from "react";
-
 import { motion } from "motion/react";
+
 const Contact = () => {
   const [result, setResult] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    setResult("Sending....");
-    const formData = new FormData(event.target);
+    setResult("Sending...");
 
-    formData.append("access_key",process.env.NEXT_PUBLIC_ACCESS_KEY);
+    const formData = new FormData(event.target);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
+      headers: {
+        Accept: "application/json",
+      },
     });
 
     const data = await response.json();
 
     if (data.success) {
-      setResult("Form Submitted Successfully");
+      setResult("✅ Form Submitted Successfully!");
       event.target.reset();
     } else {
-      console.log("Error", data);
-      setResult(data.message);
+      console.error("❌ Error:", data);
+      setResult(`❌ ${data.message || "Something went wrong"}`);
     }
   };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -44,6 +49,7 @@ const Contact = () => {
       >
         Connect with me
       </motion.h4>
+
       <motion.h2
         initial={{ y: -20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -59,7 +65,7 @@ const Contact = () => {
         transition={{ delay: 0.7, duration: 0.5 }}
         className="text-center max-w-2xl mx-auto mt-5 mb-12 font-Ovo"
       >
-        I'd love to hear from you! If You have any questions, comments or
+        I'd love to hear from you! If you have any questions, comments, or
         feedback, please use the form below.
       </motion.p>
 
@@ -70,7 +76,14 @@ const Contact = () => {
         onSubmit={onSubmit}
         className="max-w-2xl mx-auto"
       >
-        <div className="grid grid-cols-auto gap-6 mt-10  mb-8">
+        {/* Hidden access_key for Web3Forms */}
+        <input
+          type="hidden"
+          name="access_key"
+          value={process.env.NEXT_PUBLIC_ACCESS_KEY}
+        />
+
+        <div className="grid grid-cols-auto gap-6 mt-10 mb-8">
           <motion.input
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -78,20 +91,21 @@ const Contact = () => {
             type="text"
             placeholder="Enter your Name"
             required
-            className="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkHover/30 dark:border-white/90"
             name="name"
+            className="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkHover/30 dark:border-white/90"
           />
           <motion.input
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.6 }}
             type="email"
-            placeholder="Enter your email"
+            placeholder="Enter your Email"
             required
-            className="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkHover/30 dark:border-white/90"
             name="email"
+            className="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkHover/30 dark:border-white/90"
           />
         </div>
+
         <motion.textarea
           initial={{ y: 100, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -99,9 +113,10 @@ const Contact = () => {
           rows="6"
           placeholder="Enter your message"
           required
-          className="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6 dark:bg-darkHover/30 dark:border-white/90"
           name="message"
+          className="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6 dark:bg-darkHover/30 dark:border-white/90"
         ></motion.textarea>
+
         <motion.button
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
@@ -112,7 +127,9 @@ const Contact = () => {
           <Image src={assets.right_arrow_white} alt="" className="w-4" />
         </motion.button>
 
-        <p className="mt-4">{result}</p>
+        <p className="mt-4 text-center text-sm text-red-600 dark:text-white">
+          {result}
+        </p>
       </motion.form>
     </motion.div>
   );
