@@ -1,116 +1,62 @@
-import { assets, infoList, toolsData } from "@/assets/assets";
-import Image from "next/image";
+"use client";
 import React from "react";
-import { motion } from "motion/react";
+import Image from "next/image";
+import { assets } from "@/assets/assets";
+import { aboutText, facts, tools } from "@/app/data/portfolio";
+import { Reveal, SectionHeading } from "./ui";
 
 const About = ({ isDarkMode }) => {
   return (
-    <motion.div
-      id="about"
-      className="w-full px-[12%] py-10 scroll-mt-20"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <motion.h4
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="text-center mb-2 text-lg font-Ovo"
-      >
-        Introduction
-      </motion.h4>
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="text-center text-5xl font-Ovo"
-      >
-        About me
-      </motion.h2>
+    <section id="about" aria-labelledby="about-title" className="section">
+      <SectionHeading id="about-title" eyebrow="Introduction" title="About me" />
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="flex w-full flex-col lg:flex-row items-center gap-20 my-20"
-      >
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="w-64 sm:w-80 rounded-3xl max-w-none"
-        >
-          <Image
-            src={assets.user_image}
-            alt="user"
-            className="w-full rounded-3xl "
-          />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex-1 "
-        >
-          <p className="mb-10 max-w-2xl font-Ovo">
-            I am an experienced Full Stack Developer with two years of
-            professional expertise in the field. Throughout my career, I have
-            had the privilege of collaborating with prestigious organizations,
-            contributing to their success and growth.
-          </p>
-          <motion.ul
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl"
-          >
-            {infoList.map(({ icon, iconDark, title, description }, index) => (
-              <motion.li
-                whileHover={{ scale: 1.05 }}
-                className="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-lightHover hover:-translate-y-1 duration-500 hover:shadow-black dark:border-white dark:hover:shadow-white dark:hover:bg-darkHover/50"
-                key={index}
-              >
-                <Image
-                  src={isDarkMode ? iconDark : icon}
-                  alt={title}
-                  className="w-7 mt-3"
-                />
-                <h3 className="my-4 font-semibold text-gray-700 dark:text-white">
-                  {title}
-                </h3>
-                <p className="text-gray-600 text-sm dark:text-white/80">
-                  {description}
-                </p>
-              </motion.li>
+      <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:gap-20">
+        <Reveal className="w-64 shrink-0 sm:w-80">
+          <div className="relative">
+            <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl bg-accent" />
+            <Image
+              src={assets.user_image}
+              alt="Jitendra Choudhary"
+              sizes="(min-width: 640px) 320px, 256px"
+              className="relative w-full rounded-3xl border-2 border-black object-cover dark:border-white"
+            />
+          </div>
+        </Reveal>
+
+        <div className="w-full max-w-2xl flex-1">
+          <Reveal delay={0.1}>
+            <p className="font-Ovo text-xl leading-9 text-gray-800 dark:text-white/90">{aboutText}</p>
+          </Reveal>
+
+          <ul className="mt-10 grid gap-5 sm:grid-cols-3">
+            {facts.map(({ icon, iconDark, title, description }, index) => (
+              <Reveal as="li" key={title} delay={0.2 + index * 0.1} className="h-full">
+                <div className="card h-full transition hover:-translate-y-1 hover:bg-lightHover hover:shadow-black dark:hover:bg-darkHover dark:hover:shadow-white motion-reduce:hover:translate-y-0">
+                  <Image src={isDarkMode ? iconDark : icon} alt="" className="w-7" />
+                  <h3 className="mb-2 mt-4 font-semibold">{title}</h3>
+                  <p className="text-sm leading-6 text-gray-700 dark:text-white/80">{description}</p>
+                </div>
+              </Reveal>
             ))}
-          </motion.ul>
-          <motion.h4 
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.3 }}
-          className="my-6 text-gray-700 font-Ovo dark:text-white/80">
-            Tools I use
-          </motion.h4>
-          
-          <motion.ul 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
-          className="flex items-center gap-3 sm:gap-5">
-            {toolsData.map((tool, index) => (
-              <motion.li
-              whileHover={{ scale: 1.1 }}
-                className="flex items-center justify-center w-12 sm:w-14 aspect-square border border-gray-400 rounded-lg cursor-pointer hover:-translate-y-1 duration-500"
-                key={index}
-              >
-                <Image src={tool} alt="Tool" className="w-5 sm:w-7" />
-              </motion.li>
-            ))}
-          </motion.ul>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+          </ul>
+
+          <Reveal delay={0.5} className="mt-12">
+            <h3 className="font-Ovo text-lg text-gray-700 dark:text-white/80">Tools I use</h3>
+            <ul className="mt-4 flex flex-wrap items-center gap-3 sm:gap-4">
+              {tools.map((tool) => (
+                <li
+                  key={tool.name}
+                  title={tool.name}
+                  className="flex aspect-square w-14 items-center justify-center rounded-xl border border-gray-400 bg-white transition duration-300 hover:-translate-y-1 hover:bg-accent motion-reduce:hover:translate-y-0 dark:border-white/40 dark:bg-transparent"
+                >
+                  <Image src={tool.image} alt={tool.name} className="w-7" />
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </div>
+    </section>
   );
 };
 

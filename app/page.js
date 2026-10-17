@@ -1,44 +1,53 @@
 "use client";
-import { useEffect, useState } from "react";
+import { MotionConfig } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import About from "./components/About";
+import AiSection from "./components/AiSection";
 import Contact from "./components/Contact";
+import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import Projects from "./components/Projects";
-import Resume from "./components/Resume";
+import Services from "./components/Services";
+import Work from "./components/Work";
 
 export default function Home() {
-
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const hasMounted = useRef(false);
 
+  // layout.js sets the "dark" class before first paint. After hydration, read it into state.
+  // On later changes (the user toggling the theme), apply the class and save the choice.
   useEffect(() => {
-    if(localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-      setIsDarkMode(true);
-    }else{
-      setIsDarkMode(false);
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+      return;
     }
-  }, []);
-
-  useEffect(() => {
-    if(isDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.theme = "dark";
-    }else{
-      document.documentElement.classList.remove("dark");
-      localStorage.theme = "";
+    document.documentElement.classList.toggle("dark", isDarkMode);
+    try {
+      localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    } catch (error) {
+      // Storage can be blocked (private mode). The theme still applies for this visit.
     }
   }, [isDarkMode]);
 
   return (
-    <>
-      <Navbar isDarkMode={isDarkMode}  setIsDarkMode={setIsDarkMode}/>
-      <Header isDarkMode={isDarkMode}/>
-      <About isDarkMode={isDarkMode}/>
-      <Projects isDarkMode={isDarkMode}/>
-      <Resume isDarkMode={isDarkMode}/>
-      <Contact isDarkMode={isDarkMode}/>
-      <Footer isDarkMode={isDarkMode}/>
-    </>
+    // reducedMotion="user" turns off movement-based animation for people who have asked for less motion.
+    <MotionConfig reducedMotion="user">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <main id="main">
+        <Header />
+        <About isDarkMode={isDarkMode} />
+        <Services />
+        <AiSection />
+        <Work />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer isDarkMode={isDarkMode} />
+    </MotionConfig>
   );
 }
