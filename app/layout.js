@@ -13,10 +13,30 @@ const ovo = Ovo({
   weight: "400",
 });
 
+const siteDescription =
+  "Full-stack developer in Bangalore building fast, accessible web apps with React, Next.js and Spring Boot. Portfolio, experience, and contact.";
+
 export const metadata = {
   title: "Jitendra Choudhary | Full-stack developer",
-  description:
-    "Full-stack developer in Bangalore building fast, accessible web apps with React, Next.js and Spring Boot. Portfolio, experience, and contact.",
+  description: siteDescription,
+  openGraph: {
+    title: "Jitendra Choudhary | Full-stack developer",
+    description: siteDescription,
+    type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jitendra Choudhary | Full-stack developer",
+    description: siteDescription,
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#11001f" },
+  ],
 };
 
 // Runs before the first paint so the page never flashes the wrong theme.
@@ -33,7 +53,7 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body
-        className={`${outfit.className} ${ovo.className} bg-white text-gray-900 antialiased leading-7 overflow-x-hidden dark:bg-darkTheme dark:text-white`}
+        className={`${outfit.className} ${ovo.className} bg-paper text-gray-900 antialiased leading-7 overflow-x-hidden dark:bg-darkTheme dark:text-white`}
       >
         {children}
         <Analytics />

@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { answerQuestion, buildKnowledgeBase } from "@/app/lib/assistant.mjs";
 import {
   aboutText,
@@ -145,7 +146,13 @@ const Assistant = () => {
           </p>
         ) : (
           messages.map(({ id, question, result }) => (
-            <div key={id} className="space-y-3">
+            <motion.div
+              key={id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-3"
+            >
               <div className="flex justify-end">
                 <p className="max-w-[85%] rounded-2xl rounded-br-sm bg-white px-4 py-2 text-sm text-black">
                   <span className="sr-only">You asked: </span>
@@ -153,7 +160,7 @@ const Assistant = () => {
                 </p>
               </div>
               <AnswerView result={result} />
-            </div>
+            </motion.div>
           ))
         )}
       </div>

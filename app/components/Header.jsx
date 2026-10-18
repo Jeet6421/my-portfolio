@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { assets } from "@/assets/assets";
 import { heroStats, profile } from "@/app/data/portfolio";
 import { ArrowRight, DownloadIcon, Reveal } from "./ui";
@@ -33,14 +34,14 @@ const Header = () => {
           </Reveal>
 
           <Reveal delay={0.5} className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-            <a href="#contact" className="btn-primary">
+            <motion.a href="#contact" className="btn-primary" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
               Contact me
               <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href={profile.resumeUrl} download className="btn-secondary">
+            </motion.a>
+            <motion.a href={profile.resumeUrl} download className="btn-secondary" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
               My resume
               <DownloadIcon className="h-4 w-4" />
-            </a>
+            </motion.a>
           </Reveal>
 
           <Reveal delay={0.65}>
