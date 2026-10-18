@@ -1,5 +1,3 @@
-import { Outfit } from "next/font/google";
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -10,6 +8,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Brand accent: a lime highlight used for hovers, selected states and AI cues.
+        accent: "#c8f169",
+        ink: "#16111f",
         lightHover: "#fcf4ff",
         darkHover: "#2a004a",
         darkTheme: "#11001F",

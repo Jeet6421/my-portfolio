@@ -1,78 +1,72 @@
-import { assets } from "@/assets/assets";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { assets } from "@/assets/assets";
+import { profile } from "@/app/data/portfolio";
 
 const Footer = ({ isDarkMode }) => {
+  const year = new Date().getFullYear();
+
   return (
-    <div className="mt-20">
+    <footer className="mt-10 px-[6%] pb-10 sm:px-[10%] lg:px-[12%]">
       <div className="text-center">
         <Image
           src={isDarkMode ? assets.logo_dark : assets.logo}
-          alt=""
-          className="w-36 mx-auto mb-2"
+          alt="Jitendra Choudhary"
+          className="mx-auto mb-3 w-36"
         />
-
-        <div className="flex w-max items-center gap-2 mx-auto">
-          <Image
-            src={isDarkMode ? assets.mail_icon_dark : assets.mail_icon}
-            alt=""
-            className="w-6"
-          />
-          jeetdemouser@gmail.com
-        </div>
+        <a
+          href={`mailto:${profile.email}`}
+          className="inline-flex items-center gap-2 rounded-full px-3 py-1 transition hover:bg-accent hover:text-black"
+        >
+          <Image src={isDarkMode ? assets.mail_icon_dark : assets.mail_icon} alt="" className="w-6" />
+          {profile.email}
+        </a>
       </div>
 
-      <div className="text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-6">
-        <p>Copyright ©2025 Jitendra Choudhary. All rights reserved.</p>
-        <ul className="flex items-center gap-10 justify-center mt-4 sm:mt-0">
+      <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-gray-400 py-6 text-center text-sm sm:flex-row sm:text-left">
+        <p>© {year} Jitendra Choudhary. All rights reserved.</p>
+
+        <ul className="flex items-center gap-8">
           <li>
-            <a target="_blank" href="https://github.com/Jeet6421">
-              <Image
-                src={
-                  isDarkMode
-                    ?  assets.github_icon
-                    : assets.github_icon_dark
-                }
-                alt="github_mark"
-                className="w-8"
-              />
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub (opens in new tab)"
+              className="inline-flex rounded-full transition hover:-translate-y-0.5 motion-reduce:transform-none"
+            >
+              <Image src={isDarkMode ? assets.github_icon : assets.github_icon_dark} alt="" className="w-7" />
             </a>
           </li>
           <li>
             <a
+              href={profile.links.linkedin}
               target="_blank"
-              href="https://www.linkedin.com/in/jitendrachoudhary1137/"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn (opens in new tab)"
+              className="inline-flex rounded-full transition hover:-translate-y-0.5 motion-reduce:transform-none"
             >
-              <Image
-                src={
-                  isDarkMode
-                    ?  assets.linkdin_icon
-                    : assets.linkdin_icon
-                }
-                alt="linkdin_icon"
-                className="w-8"
-              />
+              <Image src={assets.linkdin_icon} alt="" className="w-7" />
             </a>
           </li>
           <li>
             <a
+              href={profile.links.x}
               target="_blank"
-              href="https://x.com/yayjeetz?t=IYjsvY5tVGmVf5OMgrhiRg&s=09"
+              rel="noopener noreferrer"
+              aria-label="X (opens in new tab)"
+              className="inline-flex rounded-full transition hover:-translate-y-0.5 motion-reduce:transform-none"
             >
-              <Image
-                src={
-                  isDarkMode
-                    ?  assets.twitter_icon_dark
-                    : assets.twitter_icon
-                }
-                alt="twitter_icon"
-                className="w-8"
-              />
+              <Image src={isDarkMode ? assets.twitter_icon_dark : assets.twitter_icon} alt="" className="w-7" />
             </a>
           </li>
         </ul>
+
+        <a href="#top" className="text-link">
+          Back to top
+        </a>
       </div>
-    </div>
+    </footer>
   );
 };
 
