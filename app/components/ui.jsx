@@ -24,6 +24,14 @@ export const SectionHeading = ({ id, eyebrow, title, description }) => (
     <h2 id={id} className="section-title mt-2">
       {title}
     </h2>
+    <motion.span
+      aria-hidden="true"
+      initial={{ scaleX: 0 }}
+      whileInView={{ scaleX: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+      className="mx-auto mt-5 block h-1 w-16 origin-left rounded-full bg-accent"
+    />
     {description && (
       <p className="mt-5 font-Ovo text-lg leading-8 text-gray-700 dark:text-white/80">{description}</p>
     )}

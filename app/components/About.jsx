@@ -43,14 +43,15 @@ const About = ({ isDarkMode }) => {
           <Reveal delay={0.5} className="mt-12">
             <h3 className="font-Ovo text-lg text-gray-700 dark:text-white/80">Tools I use</h3>
             <ul className="mt-4 flex flex-wrap items-center gap-3 sm:gap-4">
-              {tools.map((tool) => (
-                <li
-                  key={tool.name}
-                  title={tool.name}
-                  className="flex aspect-square w-14 items-center justify-center rounded-xl border border-gray-400 bg-white transition duration-300 hover:-translate-y-1 hover:bg-accent motion-reduce:hover:translate-y-0 dark:border-white/40 dark:bg-transparent"
-                >
-                  <Image src={tool.image} alt={tool.name} className="w-7" />
-                </li>
+              {tools.map((tool, index) => (
+                <Reveal as="li" key={tool.name} delay={0.5 + index * 0.08} y={12} className="flex">
+                  <div
+                    title={tool.name}
+                    className="flex aspect-square w-14 items-center justify-center rounded-xl border border-gray-400 bg-white transition duration-300 hover:-translate-y-1 hover:bg-accent motion-reduce:hover:translate-y-0 dark:border-white/40 dark:bg-transparent"
+                  >
+                    <Image src={tool.image} alt={tool.name} className="w-7" />
+                  </div>
+                </Reveal>
               ))}
             </ul>
           </Reveal>

@@ -8,11 +8,11 @@
 
 @layer base {
   :focus-visible {
-    outline: 3px solid #6d28d9;
+    outline: 3px solid theme(colors.violet);
     outline-offset: 3px;
   }
   .dark :focus-visible {
-    outline-color: #c8f169;
+    outline-color: theme(colors.accent);
   }
 }
 

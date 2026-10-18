@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Services from "./components/Services";
 import Work from "./components/Work";
+import ScrollProgress from "./components/ScrollProgress";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -34,6 +35,7 @@ export default function Home() {
   return (
     // reducedMotion="user" turns off movement-based animation for people who have asked for less motion.
     <MotionConfig reducedMotion="user">
+      <ScrollProgress />
       <a href="#main" className="skip-link">
         Skip to content
       </a>

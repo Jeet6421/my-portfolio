@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
         </noscript>
       </head>
       <body
-        className={`${outfit.className} ${ovo.className} bg-white text-gray-900 antialiased leading-7 overflow-x-hidden dark:bg-darkTheme dark:text-white`}
+        className={`${outfit.className} ${ovo.className} bg-paper text-gray-900 antialiased leading-7 overflow-x-hidden dark:bg-darkTheme dark:text-white`}
       >
         {children}
         <Analytics />
